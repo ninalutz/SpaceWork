@@ -43,23 +43,24 @@ void draw() {
 
   }
   
+  
   if(showvideo){
   image(video, 0, 0 );
   }
   
   p.endDraw();
   pushMatrix();
-  scale(-1.0, 1.0);
-  image(p,-p.width,0);
+  //scale(-1.0, 1.0);
+  image(p,0,0);
   popMatrix();
-
+fill(255);
+//rect(0, 0, width, 50);
  
 }
 
  noFill();
  fill(0);
  text("Press space to resest, p to see video feed", 50, 50);
- //rect(80, 0, width, 300);
 
 }
 
