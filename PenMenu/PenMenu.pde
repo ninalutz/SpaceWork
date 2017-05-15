@@ -16,6 +16,8 @@ float hue = 0.0;   // 0 - 360
 
 PGraphics wheelDraw;
 
+Test[] instances =  new Test[1]; 
+
 void setup() {
   size(displayWidth-50, displayHeight-100);
 
@@ -27,6 +29,7 @@ void setup() {
   
 //  wheelDraw = createGraphics();
 //  wheel.draw(wheelDraw);
+  instances[0] = new Test(20, 20, 40, 20);
 }
 
 
@@ -65,14 +68,17 @@ void draw() {
   colorMode(RGB);
   LightBar lightBar = new LightBar(int(xc - 100), int(yc + 170), 100, 50, color(centerColor), color(0, 0, 0), color(255, 255, 255));
   lightBar.drawGradient();
-  
+
   if(lightBar.isOver()){
      barColor = get(mouseX, mouseY);
      fill(barColor);
-
   }
 
+  fill(0);
   ellipse(mouseX, mouseY, 5, 5);
+  
+    for (Test t:instances)
+    t.run();
 
 }
 
