@@ -2,65 +2,78 @@
  * Draw a circular array of colored rectangles, displaying the full range
  * of hues.
  *
- * Bruce Wilson, 4/26/2013
  */
 
-final static float kCircleRadius = 150.0;
-
-final static int   kNumRectangles = 600;
+final static float kCircleRadius = 50.0;
+final static int   kNumRectangles = 300;
 final static float kRectLength = 100.0;
 final static float kRectWidth = (TWO_PI * kCircleRadius / (float)kNumRectangles) - 5;
-// final static float kRectWidth = 40.0;  // fixed width
-
 final static int   kLabelSize = 28;
 
 ColorWheel wheel;
 color centerColor = color(255, 0, 0);
 float hue = 0.0;   // 0 - 360
 
+PGraphics wheelDraw;
+
 void setup() {
   size(displayWidth-50, displayHeight-100);
 
   float xc = width / 4.0;
-  float yc = height / 2.0;
+  float yc = height / 3.0;
   wheel = new ColorWheel(xc, yc, kCircleRadius, kNumRectangles, kRectWidth, kRectLength);
-
+//    wheel.draw();
   smooth();
- // colorMode(HSB, 360, 100, 100);
-//  wheel.draw();
+  
+//  wheelDraw = createGraphics();
+//  wheel.draw(wheelDraw);
 }
 
-float brightness = 100;
 
+
+color barColor;
 void draw() {
   colorMode(RGB);
-  background(255);
+  noStroke();
+  background(100);
   
   float xc = width / 4.0;
-  float yc = height / 2.0;
-  
-  wheel.draw();
-
-  ellipse(mouseX, mouseY, 5, 5);
+  float yc = height / 3.0;
+  //image(wheelDraw, 0, 0);
+ wheel.draw();
+  fill(0);
   
   pushStyle();
-  
   // Change the hue of the center area depending on mouse position
   if ( wheel.isMouseInRectangle() ) {
     float mouseAngle = wheel.getMouseAngle();
     hue = map(mouseAngle, 0.0, TWO_PI, 0.0, 360.0);
-    colorMode(HSB, 360, 100, 100);
-    centerColor = color(hue, 100, brightness);
+
+    colorMode(HSB, 360, 255, 255);
+    barColor = color(hue, 255, 255);
+//    brightness = brightness(barColor);
+    centerColor = color(hue, 255, 255);
   }
   
   // Draw the central filled circle
-  fill(centerColor);
-  float ellipseDiameter = kCircleRadius - 20.0;
+  fill(barColor);
+  float ellipseDiameter = kCircleRadius;
   ellipse(xc, yc, ellipseDiameter, ellipseDiameter);
-  //Need to draw a lightness bar here
-
 
   popStyle();
+
+  colorMode(RGB);
+  LightBar lightBar = new LightBar(int(xc - 100), int(yc + 170), 100, 50, color(centerColor), color(0, 0, 0), color(255, 255, 255));
+  lightBar.drawGradient();
+  
+  if(lightBar.isOver()){
+     barColor = get(mouseX, mouseY);
+     fill(barColor);
+
+  }
+
+  ellipse(mouseX, mouseY, 5, 5);
+
 }
 
 

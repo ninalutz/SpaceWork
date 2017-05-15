@@ -28,7 +28,6 @@ class ColorWheel {
      
     pushStyle();
      colorMode(HSB, 360, 100, 100);
-    stroke(80);
     rectMode(CENTER);
     
     float incrAngle = TWO_PI / (float)numRects;
@@ -53,7 +52,8 @@ class ColorWheel {
     fill(getRectColor(i));
     float rectX = radius + rectLength / 2.0;
     rect(rectX, 0.0, rectLength, rectWidth);
-  }
+
+      }
   
   /*8
    * Default color scheme: assumes HSB mode.
