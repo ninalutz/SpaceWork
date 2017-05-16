@@ -37,8 +37,6 @@ class Button {
   void Draw() {
     fill(c);
     stroke(141);
-//    pushMatrix();
-//    scale(-1, -1);
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
     fill(0);
@@ -46,6 +44,18 @@ class Button {
     scale(-1, 1);
     text(label, -x - (w / 2), y + (h / 2));
     popMatrix();
+  }
+  
+   void DrawTest(PGraphics p) {
+    p.fill(c);
+    p.stroke(141);
+    p.rect(x, y, w, h, 10);
+    p.textAlign(CENTER, CENTER);
+    p.fill(0);
+    p.pushMatrix();
+    p.scale(-1, 1);
+    p.text(label, -x - (w / 2), y + (h / 2));
+    p.popMatrix();
   }
   
   void DrawImage(){

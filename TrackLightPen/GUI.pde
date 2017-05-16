@@ -28,6 +28,7 @@ void initGUI(){
    mailIcon = loadImage("mail.png");
      
   startPageSession = new Button(width/2 + 50, height/2, 200, 30, "Start Paged Session", 150);
+//  startPageSession = new Button(400, 300, 200, 30, "Start Session", 150);
   startFreeFlow = new Button(width/2 -200, height/2, 200, 30, "Start Doodle Session", 150);
   
   exitSession = new Button(width -200, 40, 70, 30, "Exit", 150);
@@ -55,7 +56,6 @@ if(notStarted){
       origin = new PVector(mouseX, mouseY);
       penButton = new Button(origin.x + 5, origin.y, 50,30, "Pen", 150);
       canvasButton = new Button(origin.x +5, origin.y + 40, 60, 30, "Canvas", 150);
-      //        eraser = new Button(int(xc) + 150, yc - 150, 40, 40, eraserIcon);
       emailButton = new Button(origin.x + 5, origin.y + 80, 60, 40, mailIcon);
     }
   }

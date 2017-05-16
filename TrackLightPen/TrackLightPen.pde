@@ -7,6 +7,7 @@ Capture video;
 color trackColor; 
 import deadpixel.keystone.*;
 
+PVector Selector;
 float weight = 1.5;
 
 color lineCol;
@@ -15,6 +16,8 @@ float redVal, greenVal, blueVal;
 Keystone ks;
 CornerPinSurface surface;
 PGraphics offscreen, canvas;
+
+ArrayList<Button>buttons = new ArrayList<Button>();
 
 int capwidth, capheight;
 void setup() {
@@ -30,10 +33,6 @@ void setup() {
   
 trackColor = color(255);
   offscreen = createGraphics(800, 600, P3D);
-// colorMode(RGB);
-// redVal = 255;
-// blueVal = 255;
-// greenVal = 255;
 
 
 }
@@ -48,27 +47,27 @@ ArrayList<PVector> Things = new ArrayList<PVector>();
 ArrayList<Stroke>Strokes = new ArrayList<Stroke>();
 
 void draw() {
+//  noCursor();
   video.loadPixels();
   background(barColorC);
-  
   renderTable();
- // pushMatrix();
-//  translate(-1, -1);
-  mainGUI();
-//  popMatrix();
-  
-  println(click);
+ mainGUI();
+//  println(click);
 }
 
 int click = 0;
 void drawCanvas(PGraphics p){
+  
    colorID(p);
   
+
    for(int i = 0; i<Strokes.size()-1; i++){
      if( abs(Strokes.get(i).time - Strokes.get(i+1).time) < 100){
         p.stroke(Strokes.get(i).line);
         p.strokeWeight(Strokes.get(i).thickness);
-        p.line(Strokes.get(i).loc.x, Strokes.get(i).loc.y, Strokes.get(i+1).loc.x, Strokes.get(i+1).loc.y);
+          if(!notStarted && !Menu && !penMenu && !canvasMenu){
+        p.line(-Strokes.get(i).loc.x, -Strokes.get(i).loc.y, -Strokes.get(i+1).loc.x, -Strokes.get(i+1).loc.y);
+          }
       }
       
       PVector dist = PVector.sub(Strokes.get(i).loc,Strokes.get(i+1).loc);
@@ -82,13 +81,22 @@ void drawCanvas(PGraphics p){
       }
       
       if(click > 20){
-        println("YASSS");
+       // mouseX = int(Strokes.get(i).loc.x);
+       // mouseY = int(Strokes.get(i).loc.y);
+//       println(mouseX, mouseY);
+       println(-Strokes.get(i).loc.x, -Strokes.get(i).loc.y);
+       println(surface.getTransformedMouse());
+
         click = 0;
       }
       
     }
-
+    
+//  offscreen.ellipse( 491.0, 363.0, 50, 50);
+//  startPageSession.DrawTest(p);
   surface.render(offscreen);
+  
+//  println(surface.getTransformedMouse());
 
 }
 
