@@ -22,6 +22,7 @@ void mousePressed() {
   
  if(emailButton.MouseIsOver()){
     Menu = false;
+    println("MAIL");
   }
   
   }
