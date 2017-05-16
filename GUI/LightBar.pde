@@ -15,11 +15,12 @@ class LightBar{
   
   public boolean isOver(){
     if(mouseX < x + 2*w && mouseX > x && mouseY < y + h && mouseY > y){
-      
       return true;
     }
     return false;
   }
+  
+
   
   void drawGradient() {
       pushStyle();
@@ -31,7 +32,6 @@ class LightBar{
         stroke(c);
         line(i, y, i, y+h);
       }
-//    pushMatrix();
 
      for (int i = x; i <= x + w; i++) {
         float inter = map(i, x, x+w, 0, 1);
@@ -39,7 +39,7 @@ class LightBar{
         stroke(c);
         line(i+w, y, i+w, y+h);
       }
-//      popMatrix();
+
       popStyle();
 }
 
