@@ -54,7 +54,7 @@ void draw() {
   renderTable();
  // pushMatrix();
 //  translate(-1, -1);
-  mainGUI(offscreen);
+  mainGUI();
 //  popMatrix();
   
   println(click);

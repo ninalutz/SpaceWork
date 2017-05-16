@@ -37,10 +37,15 @@ class Button {
   void Draw() {
     fill(c);
     stroke(141);
+//    pushMatrix();
+//    scale(-1, -1);
     rect(x, y, w, h, 10);
     textAlign(CENTER, CENTER);
     fill(0);
-    text(label, x + (w / 2), y + (h / 2));
+    pushMatrix();
+    scale(-1, 1);
+    text(label, -x - (w / 2), y + (h / 2));
+    popMatrix();
   }
   
   void DrawImage(){

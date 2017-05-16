@@ -13,7 +13,7 @@ void renderTable(){
   popMatrix();
   offscreen.noFill();
   offscreen.endDraw();
-    mainGUI(offscreen);
+  mainGUI();
   drawCanvas(offscreen);
   surface.render(offscreen);
 }
