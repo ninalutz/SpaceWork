@@ -11,7 +11,7 @@ final static float kRectWidth = (TWO_PI * kCircleRadius / (float)kNumRectangles)
 final static int   kLabelSize = 28;
 
 
-ColorWheel wheel;
+ColorWheel wheel, wheelC;
 color centerColor = color(255, 0, 0);
 float hue = 0.0;   // 0 - 360
 
@@ -19,14 +19,14 @@ PGraphics wheelDraw;
 
 float strokeSize = 2;
 
-Button button, eraser, penButton, canvasButton, emailButton;
+Button button, buttonC, eraser, penButton, canvasButton, emailButton;
 
 boolean penMenu, Menu, canvasMenu;
 color barColor;
 PVector origin;
 float xc, yc;
 
-Slider slider;
+Slider slider, sliderC;
 PImage eraserIcon, mailIcon;
 
 void setup() {
@@ -39,6 +39,8 @@ void setup() {
 void draw() {
   noStroke();
   background(100);
+  
+ 
   
   if(mousePressed){
     start++;
@@ -75,6 +77,19 @@ if(penMenu){
   eraser.DrawImage();
   
   drawPenMenu();
+}
+
+if(canvasMenu){
+  pushMatrix();
+  stroke(0);
+  noFill();
+  rect(origin.x - 225, origin.y - 250, 450, 500, 20, 20, 20, 20);
+  popMatrix();
+  
+  buttonC.MouseIsOver();
+  buttonC.Draw();
+  
+  drawCanvasMenu();
 }
   
 }
