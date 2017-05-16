@@ -1,23 +1,21 @@
-void drawCanvasMenu(){
+float ProjBright;
+color barColorC = color(100);
 
+void drawCanvasMenu(){
   wheelC.draw();
   fill(0);
   
   pushStyle();
   // Change the hue of the center area depending on mouse position
   if ( wheelC.isMouseInRectangle() ) {
-    float mouseAngle = wheel.getMouseAngle();
+    float mouseAngle = wheelC.getMouseAngle();
     hue = map(mouseAngle, 0.0, TWO_PI, 0.0, 360.0);
 
     colorMode(HSB, 360, 255, 255);
-    barColor = color(hue, 255, 255);
+    barColorC = color(hue, 255, 255);
     centerColor = color(hue, 255, 255);
   }
   
-  // Draw the central filled circle
-  fill(barColor);
-  ellipse(xc, yc, strokeSize, strokeSize);
-
   popStyle();
 
   colorMode(RGB);
@@ -25,13 +23,13 @@ void drawCanvasMenu(){
   lightBar.drawGradient();
 
   if(lightBar.isOver()){
-     barColor = get(mouseX, mouseY);
-     fill(barColor);
+     barColorC = get(mouseX, mouseY);
+
   }
 
-  fill(0);
-  ellipse(mouseX, mouseY, 5, 5);
   
   sliderC.run();
-  strokeSize = (100-sliderC.value)/100 * 50;
+  
+  ProjBright = (100-sliderC.value)/100 * 50;
+
 }

@@ -46,7 +46,7 @@ void mousePressed() {
   
     if (eraser.MouseIsOver()) {
     println("Clicked: ");
-    barColor = 100;
+    barColor = barColorC;
   }
 
   }
@@ -70,6 +70,11 @@ void mouseReleased() {
   if(penMenu){
   //unlock
   slider.lock = false;
+  }
+  
+    if(canvasMenu){
+  //unlock
+  sliderC.lock = false;
   }
 
 }

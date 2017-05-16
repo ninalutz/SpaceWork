@@ -33,12 +33,13 @@ void setup() {
    size(displayWidth-50, displayHeight-100);
    eraserIcon = loadImage("eraser.png");
    mailIcon = loadImage("mail.png");
+     
 }
 
 
 void draw() {
   noStroke();
-  background(100);
+ background(color(barColorC));
   
  
   
@@ -91,6 +92,10 @@ if(canvasMenu){
   
   drawCanvasMenu();
 }
+  
+  fill(barColor);
+  noStroke();
+  ellipse(mouseX, mouseY, 10, 10);
   
 }
 

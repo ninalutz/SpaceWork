@@ -29,12 +29,9 @@ void drawPenMenu(){
 
   if(lightBar.isOver()){
      barColor = get(mouseX, mouseY);
-     fill(barColor);
   }
 
-  fill(0);
-  ellipse(mouseX, mouseY, 5, 5);
-  
+
   slider.run();
   strokeSize = (100-slider.value)/100 * 50;
 }
