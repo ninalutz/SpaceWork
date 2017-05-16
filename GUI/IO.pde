@@ -2,6 +2,15 @@ float start;
 
 void mousePressed() {
   
+  if (startPageSession.MouseIsOver()){
+    notStarted = false;
+  }
+  
+    
+  if (startFreeFlow.MouseIsOver()){
+    notStarted = false;
+  }
+  
   if(Menu){
   if(penButton.MouseIsOver()){
        penMenu = true;

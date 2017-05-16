@@ -19,7 +19,7 @@ PGraphics wheelDraw;
 
 float strokeSize = 2;
 
-Button button, buttonC, eraser, penButton, canvasButton, emailButton;
+Button button, buttonC, eraser, penButton, canvasButton, emailButton, startPageSession, startFreeFlow, exitSession;
 
 boolean penMenu, Menu, canvasMenu;
 color barColor;
@@ -34,15 +34,31 @@ void setup() {
    eraserIcon = loadImage("eraser.png");
    mailIcon = loadImage("mail.png");
      
+  startPageSession = new Button(width/2 + 50, height/2, 200, 30, "Start Paged Session", 150);
+  startFreeFlow = new Button(width/2 -200, height/2, 200, 30, "Start Doodle Session", 150);
+  
+  exitSession = new Button(width -200, 40, 70, 30, "Exit", 150);
 }
 
+boolean notStarted = true;
 
 void draw() {
   noStroke();
  background(color(barColorC));
-  
  
+ exitSession.Draw();
+ if(exitSession.MouseIsOver()){
+   notStarted = true;
+ }
   
+if(notStarted){
+ startPageSession.Draw();
+ startPageSession.MouseIsOver();
+ startFreeFlow.Draw();
+ startFreeFlow.MouseIsOver();
+}
+  
+  if(!notStarted){
   if(mousePressed){
     start++;
     if(start > 60 && !Menu && !penMenu && !canvasMenu){
@@ -92,10 +108,13 @@ if(canvasMenu){
   
   drawCanvasMenu();
 }
-  
+ 
+} 
   fill(barColor);
   noStroke();
   ellipse(mouseX, mouseY, 10, 10);
+  
+ 
   
 }
 
