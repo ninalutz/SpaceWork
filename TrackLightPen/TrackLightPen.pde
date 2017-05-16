@@ -48,7 +48,7 @@ void captureEvent(Capture video) {
 ArrayList<PVector> Things = new ArrayList<PVector>();
 
 void draw() {
-  background(0);
+  background(barColorC);
   video.loadPixels();
   
   offscreen.beginDraw();
@@ -67,7 +67,7 @@ void draw() {
   popMatrix();
   offscreen.fill(255, 0, 0);
   offscreen.endDraw();
-   drawCanvas(offscreen);
+  drawCanvas(offscreen);
   surface.render(offscreen);
   
   mainGUI();
@@ -120,8 +120,8 @@ void drawCanvas(PGraphics p){
    for(int i = 0; i<Things.size()-1; i++){
       PVector dist = PVector.sub(Things.get(i),Things.get(i+1));
      if( abs(dist.mag()) < 30){
-        p.stroke(lineCol);
-        p.strokeWeight(weight);
+        p.stroke(barColor);
+        p.strokeWeight(strokeSize);
         p.line(Things.get(i).x, Things.get(i).y, Things.get(i+1).x, Things.get(i+1).y);
        // println(Things.get(i).x, Things.get(i).y);
       }
