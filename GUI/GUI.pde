@@ -19,7 +19,7 @@ PGraphics wheelDraw;
 
 float strokeSize = 2;
 
-Button button, eraser;
+Button button, eraser, penButton, canvasButton, emailButton;
 
 //Slider[] instances =  new Slider[1]; 
 
@@ -34,7 +34,7 @@ void setup() {
 }
 
 
-boolean penMenu;
+boolean penMenu, Menu, canvasMenu;
 color barColor;
 PVector origin;
 float xc, yc;
@@ -44,36 +44,36 @@ void draw() {
   
   if(mousePressed){
     start++;
-    if(start > 50 && !penMenu){
-     penMenu = true;
-      start = 0;
-       origin = new PVector(mouseX, mouseY);
-        xc = origin.x;
-        yc = origin.y;
-        wheel = new ColorWheel(xc, yc, kCircleRadius, kNumRectangles, kRectWidth, kRectLength);
-        slider = new Slider(int(xc)-kRectLength, yc-180, 20, 10, 200);
-        button = new Button (xc + 180, yc - 240, 30, 30, "X", #ff0000);
-        eraser = new Button(int(xc) + 150, yc - 150, 40, 40, eraserIcon);
+    if(start > 50 && !Menu && !penMenu && !canvasMenu){
+      Menu = true;
+      origin = new PVector(mouseX, mouseY);
+      penButton = new Button(origin.x + 5, origin.y, 50,30, "Pen", 150);
+      canvasButton = new Button(origin.x +5, origin.y + 40, 60, 30, "Canvas", 150);
+      emailButton = new Button(origin.x + 5, origin.y + 80, 60, 30, "Email", 150);
     }
+  }
+  
+  if(Menu){
+    penButton.Draw();
+    canvasButton.Draw();
+    emailButton.Draw();
+    penButton.MouseIsOver();
+    emailButton.MouseIsOver();
+    canvasButton.MouseIsOver();
   }
 
 if(penMenu){
-
   pushMatrix();
   stroke(0);
   noFill();
-//  rectMode(CENTER);
   rect(origin.x - 225, origin.y - 250, 450, 500, 20, 20, 20, 20);
-//rectMode(LEFT); 
   popMatrix();
-  
   
   button.MouseIsOver();
   button.Draw();
   
   eraser.MouseIsOver();
   eraser.DrawImage();
-
   
   drawPenMenu();
 }
