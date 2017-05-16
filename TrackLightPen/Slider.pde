@@ -1,8 +1,3 @@
-
- 
-
- 
- 
 class Slider {
   //class vars
   float x;

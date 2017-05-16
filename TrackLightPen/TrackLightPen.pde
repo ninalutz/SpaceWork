@@ -28,14 +28,13 @@ void setup() {
   
   video.start();
   
-  // Start off tracking for red
-  trackColor = color(153, 54, 48);
+trackColor = color(255);
   offscreen = createGraphics(800, 600, P3D);
- colorMode(RGB);
- redVal = 255;
- blueVal = 255;
- greenVal = 255;
- lineCol = color(redVal, greenVal, blueVal);
+// colorMode(RGB);
+// redVal = 255;
+// blueVal = 255;
+// greenVal = 255;
+
 
 }
 
@@ -46,17 +45,23 @@ void captureEvent(Capture video) {
 }
 
 ArrayList<PVector> Things = new ArrayList<PVector>();
+ArrayList<Stroke>Strokes = new ArrayList<Stroke>();
 
 void draw() {
-  background(barColorC);
+//  background(barColorC);
   video.loadPixels();
+  background(barColorC);
   
   offscreen.beginDraw();
   pushMatrix();
   offscreen.scale(-1, -1);
   offscreen.image(video, -video.width, -video.height);
+  offscreen.background(barColorC, 150);
   offscreen.noStroke();
-  offscreen.ellipse(-50, -70, 70, 70);
+ // offscreen.ellipse(-50, -70, 70, 70);
+ if(Strokes.size() > 1){
+ offscreen.ellipse(Strokes.get(Strokes.size()-1).loc.x + 5, Strokes.get(Strokes.size()-1).loc.y, 5, 5);
+ }
   drawCanvas(offscreen);
 //  offscreen.fill(0, 255, 0);
 //  offscreen.ellipse(-800, -10, 50, 50);
@@ -65,7 +70,8 @@ void draw() {
 //  offscreen.fill(255, 0, 0);
 //  offscreen.ellipse(0, -600, 50, 50);
   popMatrix();
-  offscreen.fill(255, 0, 0);
+//  offscreen.fill(255, 0, 0);
+  offscreen.noFill();
   offscreen.endDraw();
   drawCanvas(offscreen);
   surface.render(offscreen);
@@ -109,20 +115,17 @@ void drawCanvas(PGraphics p){
 
   // We only consider the color found if its color distance is less than 10. 
   // This threshold of 10 is arbitrary and you can adjust this number depending on how accurate you require the tracking to be.
-  if (worldRecord < 50) { 
+  if (worldRecord < 200) { 
     // Draw a circle at the tracked pixel
-      p.fill(0, 255, 0);
-     // p.ellipse(closestX - 800, closestY - 600, 50, 50);
-    Things.add(new PVector(closestX-800, closestY-600));
+    p.fill(0, 255, 0, 50);
+    Strokes.add(new Stroke(new PVector(closestX-800, closestY-600), millis(), barColor, strokeSize)); 
   }
   
-   for(int i = 0; i<Things.size()-1; i++){
-      PVector dist = PVector.sub(Things.get(i),Things.get(i+1));
-     if( abs(dist.mag()) < 30){
-        p.stroke(barColor);
-        p.strokeWeight(strokeSize);
-        p.line(Things.get(i).x, Things.get(i).y, Things.get(i+1).x, Things.get(i+1).y);
-       // println(Things.get(i).x, Things.get(i).y);
+   for(int i = 0; i<Strokes.size()-1; i++){
+     if( abs(Strokes.get(i).time - Strokes.get(i+1).time) < 100){
+        p.stroke(Strokes.get(i).line);
+        p.strokeWeight(Strokes.get(i).thickness);
+        p.line(Strokes.get(i).loc.x, Strokes.get(i).loc.y, Strokes.get(i+1).loc.x, Strokes.get(i+1).loc.y);
       }
     }
 

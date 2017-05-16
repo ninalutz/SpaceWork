@@ -20,7 +20,7 @@ void keyPressed() {
     break;
   
   case ' ':
-    Things.clear();
+    Strokes.clear();
     break; 
     
   case '+':
