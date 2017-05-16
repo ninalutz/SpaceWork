@@ -33,5 +33,5 @@ void drawPenMenu(){
 
 
   slider.run();
-  strokeSize = (100-slider.value)/100 * 50;
+  strokeSize = (100-slider.value)/100 * 10;
 }

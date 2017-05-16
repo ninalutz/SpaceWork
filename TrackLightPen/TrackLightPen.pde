@@ -69,7 +69,6 @@ void draw() {
   offscreen.endDraw();
   drawCanvas(offscreen);
   surface.render(offscreen);
-  
   mainGUI();
 }
 
