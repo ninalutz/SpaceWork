@@ -19,6 +19,7 @@ PGraphics offscreen, canvas;
 int capwidth, capheight;
 void setup() {
   size(displayWidth, displayHeight, P3D);
+  initGUI();
   video = new Capture(this, 800, 600);
   
   
@@ -68,6 +69,8 @@ void draw() {
   offscreen.endDraw();
    drawCanvas(offscreen);
   surface.render(offscreen);
+  
+  mainGUI();
 }
 
 
@@ -128,66 +131,4 @@ void drawCanvas(PGraphics p){
 
 }
 
-int colorinc = 5;
 
-
-void keyPressed() {
-  switch(key) {
-  case 'c':
-    // enter/leave calibration mode, where surfaces can be warped 
-    // and moved
-    ks.toggleCalibration();
-    break;
-
-  case 'l':
-    // loads the saved layout
-    ks.load();
-    break;
-
-  case 's':
-    // saves the layout
-    ks.save();
-    break;
-  
-  case ' ':
-    Things.clear();
-    break; 
-    
-  case '+':
-    weight += 1;
-    break;
-
-  case '-':
-    weight -= 1;
-    break;
-    
-  case 'r':
-    redVal -= 5;
-    break;
-    
-   case 'R':
-    redVal += 5;
-    break;
-  
-  case 'G':
-    greenVal += 5;
-    break;
-    
-  case 'g':
-    greenVal -= 5;
-    break;  
-    
-  case 'b':
-    blueVal -= 5;
-    break;  
- 
-  case 'B':
-    blueVal += 5;
-    break; 
-    
-  case 'e':
-    saveFrame("drawing.pdf");
-    break;
-    
-  }
-}
