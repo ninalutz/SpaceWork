@@ -24,80 +24,64 @@ void setup() {
   size(displayWidth, displayHeight, P3D);
   initGUI();
   video = new Capture(this, 800, 600);
-  
-  
+
   ks = new Keystone(this);
   surface = ks.createCornerPinSurface(800, 600, 20);
-  
   video.start();
-  
-trackColor = color(255);
+  trackColor = color(255);
   offscreen = createGraphics(800, 600, P3D);
-
-
 }
 
 void captureEvent(Capture video) {
   // Read image from the camera
   video.read();
-  
 }
 
 ArrayList<PVector> Things = new ArrayList<PVector>();
 ArrayList<Stroke>Strokes = new ArrayList<Stroke>();
 
 void draw() {
-//  noCursor();
   video.loadPixels();
   background(barColorC);
   renderTable();
- mainGUI();
-//  println(click);
+  mainGUI();
 }
 
 int click = 0;
-void drawCanvas(PGraphics p){
-  
-   colorID(p);
-  
+void drawCanvas(PGraphics p) {
 
-   for(int i = 0; i<Strokes.size()-1; i++){
-     if( abs(Strokes.get(i).time - Strokes.get(i+1).time) < 100){
-        p.stroke(Strokes.get(i).line);
-        p.strokeWeight(Strokes.get(i).thickness);
-          if(!notStarted && !Menu && !penMenu && !canvasMenu){
-        p.line(-Strokes.get(i).loc.x, -Strokes.get(i).loc.y, -Strokes.get(i+1).loc.x, -Strokes.get(i+1).loc.y);
-          }
-      }
-      
-      PVector dist = PVector.sub(Strokes.get(i).loc,Strokes.get(i+1).loc);
+  colorID(p);
 
-     if( abs(Strokes.get(i).time - Strokes.get(i+1).time) == 4 && abs(dist.mag()) < 2){
-        click ++;
-      }
-      
-      if( abs(Strokes.get(i).time - Strokes.get(i+1).time) > 4 && abs(dist.mag()) > 2){
-        click = 0;
-      }
-      
-      if(click > 20){
-       // mouseX = int(Strokes.get(i).loc.x);
-       // mouseY = int(Strokes.get(i).loc.y);
-//       println(mouseX, mouseY);
-       println(-Strokes.get(i).loc.x, -Strokes.get(i).loc.y);
-       println(surface.getTransformedMouse());
 
-        click = 0;
+  for (int i = 0; i<Strokes.size ()-1; i++) {
+    if ( abs(Strokes.get(i).time - Strokes.get(i+1).time) < 100) {
+      p.stroke(Strokes.get(i).line);
+      p.strokeWeight(Strokes.get(i).thickness);
+      if (!notStarted && !Menu && !penMenu && !canvasMenu) {
+         p.line(Strokes.get(i).loc.x, Strokes.get(i).loc.y, Strokes.get(i+1).loc.x, Strokes.get(i+1).loc.y);
       }
-      
     }
-    
-//  offscreen.ellipse( 491.0, 363.0, 50, 50);
-//  startPageSession.DrawTest(p);
+
+    PVector dist = PVector.sub(Strokes.get(i).loc, Strokes.get(i+1).loc);
+
+    if ( abs(Strokes.get(i).time - Strokes.get(i+1).time) == 4 && abs(dist.mag()) < 2) {
+      click ++;
+    }
+
+    if ( abs(Strokes.get(i).time - Strokes.get(i+1).time) > 4 && abs(dist.mag()) > 2) {
+      click = 0;
+    }
+
+    if (click > 20) {
+      // mouseX = int(Strokes.get(i).loc.x);
+      // mouseY = int(Strokes.get(i).loc.y);
+      //       println(mouseX, mouseY);
+      //println(-Strokes.get(i).loc.x, -Strokes.get(i).loc.y);
+      //println(surface.getTransformedMouse());
+
+      click = 0;
+    }
+  }
   surface.render(offscreen);
-  
-//  println(surface.getTransformedMouse());
-
 }
-
 

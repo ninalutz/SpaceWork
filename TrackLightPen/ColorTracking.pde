@@ -1,6 +1,6 @@
  void colorID(PGraphics p){
  // Before we begin searching, the "world record" for closest color is set to a high number that is easy for the first pixel to beat.
-  float worldRecord = 500; 
+  float worldRecord = 50; 
 
   // XY coordinate of closest color
   int closestX = 0;
@@ -20,7 +20,9 @@
       float b2 = blue(trackColor);
 
       // Using euclidean distance to compare colors
-      float d = dist(r1, g1, b1, r2, g2, b2); // We are using the dist( ) function to compare the current color with the color we are tracking.
+      //float d = dist(r1, g1, b1, r2, g2, b2); // We are using the dist( ) function to compare the current color with the color we are tracking.
+      
+      float d = abs(b1 - b2); // Ignore everything but blue
 
       // If current color is more similar to tracked color than
       // closest color, save current location and current difference
@@ -32,8 +34,9 @@
     }
   }
 
-  if (worldRecord < 200) { 
+  if (worldRecord < 50) { 
     p.fill(0, 255, 0, 50);
+    println("aljkfsf");
     Strokes.add(new Stroke(new PVector(closestX-800, closestY-600), millis(), barColor, strokeSize)); 
   }
   }
