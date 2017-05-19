@@ -20,14 +20,35 @@ class Click{
 void Clicked(){
   for(int i = 0; i<Clicks.size(); i++){
      if(abs(millis() - Clicks.get(i).time) < 100){
-       println("CLICKED", surface.getTransformedMouse());
-       println(startFreeFlow.IsOver(surface.getTransformedMouse()));
+       println("CLICKED");
        println(Clicks.get(i).loc);
-       println(surface.getTransformedCursor(mouseX, mouseY));
-       println(surface.getTransformedCursor(996,550));
-       if(startFreeFlow.IsOver(new PVector(603.0, 279.0))){
+
+    if(notStarted){
+    if(startFreeFlow.IsOver(new PVector(-Clicks.get(i).loc.x + 100, -Clicks.get(i).loc.y))){
+        Strokes.clear();
         notStarted = false;
+
      }
+    }
+    
+    if(!notStarted){
+   
+     if(exitSession.IsOver(new PVector(-Clicks.get(i).loc.x, -Clicks.get(i).loc.y))){
+       notStarted = true;
+       Strokes.clear();
+
+     }
+     
+     else{
+        println("HIIII");
+        Menu = true;
+        origin = new PVector(-Clicks.get(i).loc.x, -Clicks.get(i).loc.y);
+        penButton = new Button(origin.x + 5, origin.y, 50,30, "Pen", 150);
+        canvasButton = new Button(origin.x +5, origin.y + 100, 60, 30, "Canvas", 150);
+        emailButton = new Button(origin.x + 5, origin.y + 100, 60, 40, mailIcon);
+     }
+    }
+     
      }
   }
 }

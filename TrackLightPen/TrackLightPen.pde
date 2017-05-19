@@ -75,7 +75,7 @@ void drawCanvas(PGraphics p) {
     if ( abs(timebetween) < 200) {
       p.stroke(Strokes.get(i).line);
       p.strokeWeight(Strokes.get(i).thickness);
-      if (!notStarted && !Menu && !penMenu && !canvasMenu) {
+      if (!notStarted) {
          p.line(Strokes.get(i).loc.x, Strokes.get(i).loc.y, Strokes.get(i+1).loc.x, Strokes.get(i+1).loc.y);
       }
       

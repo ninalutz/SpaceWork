@@ -26,47 +26,34 @@ PImage eraserIcon, mailIcon;
 void initGUI(){
    eraserIcon = loadImage("eraser.png");
    mailIcon = loadImage("mail.png");
+   println(width/4 - 25, height/4);
   startFreeFlow = new Button(width/4 - 25, height/4, 200, 30, "Start Session", 150);
-  exitSession = new Button(width/4-25, 200, 70, 30, "Exit", 150);
+  exitSession = new Button(300, height/4, 70, 30, "Exit", 150);
 }
 
 
 void mainGUI(){
-//exitSession.DrawTest(offscreen);
-//println(notStarted);
-println(exitSession.MouseIsOver());
- if(exitSession.MouseIsOver()){
-   Strokes.clear();
-   notStarted = true;
- }
-  
+
 if(notStarted){
- //startFreeFlow.Draw();
  startFreeFlow.DrawTest(offscreen);
  startFreeFlow.MouseIsOver();
 }
-  
-  if(!notStarted){
-  if(mousePressed){
-    start++;
-    if(start > 60 && !Menu && !penMenu && !canvasMenu){
-      Menu = true;
-      origin = new PVector(mouseX, mouseY);
-      penButton = new Button(origin.x + 5, origin.y, 50,30, "Pen", 150);
-      canvasButton = new Button(origin.x +5, origin.y + 40, 60, 30, "Canvas", 150);
-      emailButton = new Button(origin.x + 5, origin.y + 80, 60, 40, mailIcon);
-    }
-  }
-  
-  if(Menu){
-    penButton.Draw();
-    canvasButton.Draw();
-    emailButton.DrawImage();
+
+else{
+  exitSession.DrawTest(offscreen);
+  exitSession.MouseIsOver();
+}
+
+if(Menu){
+    penButton.DrawTest(offscreen);
+    canvasButton.DrawTest(offscreen);
+    emailButton.DrawTestImage(offscreen);
     penButton.MouseIsOver();
     emailButton.MouseIsOver();
     canvasButton.MouseIsOver();
   }
-
+  
+  if(!notStarted){
 if(penMenu){
   pushMatrix();
   stroke(0);
@@ -100,5 +87,5 @@ if(canvasMenu){
   fill(barColor);
   noStroke();
   ellipse(mouseX, mouseY, 10, 10);
-  exitSession.DrawTest(offscreen);
+//  exitSession.DrawTest(offscreen);
 }

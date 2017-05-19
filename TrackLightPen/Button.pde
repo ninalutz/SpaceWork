@@ -55,17 +55,23 @@ class Button {
     p.stroke(141);
     p.fill(c);
     p.rect(-x, -y, w, h, 10);
-  //  p.textAlign(CENTER, CENTER);
-//    p.pushMatrix();
-//    p.scale(-1, 1);
-//    p.fill(0);
-//    p.text(label, -x - (w / 2), -y + (h / 2));
-//    p.popMatrix();
+    p.textAlign(CENTER, CENTER);
+    p.pushMatrix();
+    p.scale(-1, -1);
+    p.fill(0);
+    p.text(label, x - (w / 2), y - (h / 2));
+    p.popMatrix();
     p.endDraw();
   }
   
   void DrawImage(){
     image(icon, x, y, w, h);
+  }
+  
+    void DrawTestImage(PGraphics p ){
+     p.beginDraw();
+    image(icon, -x, -y, w, h);
+    p.endDraw();
   }
   
   boolean MouseIsOver() {
