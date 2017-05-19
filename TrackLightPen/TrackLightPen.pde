@@ -19,6 +19,8 @@ PGraphics offscreen, canvas;
 
 ArrayList<Button>buttons = new ArrayList<Button>();
 
+String email = "ninalutz2015@gmail.com";
+
 int capwidth, capheight;
 void setup() {
   size(displayWidth, displayHeight, P3D);
@@ -30,6 +32,14 @@ void setup() {
   video.start();
   trackColor = color(255);
   offscreen = createGraphics(800, 600, P3D);
+  
+    try {
+     robot = new Robot();
+  } 
+    catch (Exception e) {
+    println("Can't Initialize the Robot");
+  }
+  
 }
 
 void captureEvent(Capture video) {
@@ -45,6 +55,7 @@ void draw() {
   background(barColorC);
   renderTable();
   mainGUI();
+//  Clicked();
 }
 
 int click = 0;
@@ -54,32 +65,39 @@ void drawCanvas(PGraphics p) {
 
 
   for (int i = 0; i<Strokes.size ()-1; i++) {
-    if ( abs(Strokes.get(i).time - Strokes.get(i+1).time) < 100) {
+        PVector dist = PVector.sub(Strokes.get(i).loc, Strokes.get(i+1).loc);
+        float timebetween = abs(Strokes.get(i).time - Strokes.get(i+1).time);
+          
+          if(dist.mag() < 0){
+          Strokes.remove(i);
+        }
+        
+    if ( abs(timebetween) < 200) {
       p.stroke(Strokes.get(i).line);
       p.strokeWeight(Strokes.get(i).thickness);
       if (!notStarted && !Menu && !penMenu && !canvasMenu) {
          p.line(Strokes.get(i).loc.x, Strokes.get(i).loc.y, Strokes.get(i+1).loc.x, Strokes.get(i+1).loc.y);
       }
+      
     }
 
-    PVector dist = PVector.sub(Strokes.get(i).loc, Strokes.get(i+1).loc);
-
-    if ( abs(Strokes.get(i).time - Strokes.get(i+1).time) == 4 && abs(dist.mag()) < 2) {
+   dist = PVector.sub(Strokes.get(i).loc, Strokes.get(i+1).loc);
+  
+//  println(click);
+    if (dist.mag() < .5) {
       click ++;
+
     }
 
-    if ( abs(Strokes.get(i).time - Strokes.get(i+1).time) > 4 && abs(dist.mag()) > 2) {
+    if ( dist.mag() > Strokes.get(i).thickness) {
       click = 0;
     }
 
-    if (click > 20) {
-      // mouseX = int(Strokes.get(i).loc.x);
-      // mouseY = int(Strokes.get(i).loc.y);
-      //       println(mouseX, mouseY);
-      //println(-Strokes.get(i).loc.x, -Strokes.get(i).loc.y);
-      //println(surface.getTransformedMouse());
-
+    if (click == 20) {
+      Clicks.add(new Click(Strokes.get(i).loc, Strokes.get(i).time));
       click = 0;
+      Clicked();
+      Clicks.clear();
     }
   }
   surface.render(offscreen);

@@ -47,15 +47,21 @@ class Button {
   }
   
    void DrawTest(PGraphics p) {
-    p.fill(c);
+    p.beginDraw();
+//    println("HELLO");
+//    p.fill(#00ff00);
+//    p.stroke(141);
+//    p.ellipse(0, 0, 500, 500);
     p.stroke(141);
-    p.rect(x, y, w, h, 10);
+    p.fill(c);
+    p.rect(-x, -y, w, h, 10);
     p.textAlign(CENTER, CENTER);
-    p.fill(0);
     p.pushMatrix();
     p.scale(-1, 1);
+    p.fill(0);
     p.text(label, -x - (w / 2), y + (h / 2));
     p.popMatrix();
+    p.endDraw();
   }
   
   void DrawImage(){
@@ -71,6 +77,18 @@ class Button {
     return false;
   }
 
+  
+  boolean IsOver(PVector plz) {
+    for(int i = 0; i<Clicks.size(); i++){
+    if (plz.x > x && plz.x < (x + w) && plz.y > y && plz.y < (y + h)) {
+      c = color(c, 100);
+      return true;
+    }
+    }
+    c = color(CM);
+    return false;
+    
+  }
   
 }
 

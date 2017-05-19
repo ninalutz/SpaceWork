@@ -36,7 +36,6 @@
 
   if (worldRecord < 50) { 
     p.fill(0, 255, 0, 50);
-    println("aljkfsf");
     Strokes.add(new Stroke(new PVector(closestX-800, closestY-600), millis(), barColor, strokeSize)); 
   }
   }

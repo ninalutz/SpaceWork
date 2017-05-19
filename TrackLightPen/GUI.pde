@@ -11,7 +11,7 @@ color centerColor = color(255, 0, 0);
 float hue = 0.0;   // 0 - 360
 float strokeSize = 2;
 
-Button button, buttonC, eraser, penButton, canvasButton, emailButton, startPageSession, startFreeFlow, exitSession;
+Button button, buttonC, eraser, penButton, canvasButton, emailButton, startFreeFlow, exitSession;
 
 boolean penMenu, Menu, canvasMenu;
 boolean notStarted = true;
@@ -26,12 +26,8 @@ PImage eraserIcon, mailIcon;
 void initGUI(){
    eraserIcon = loadImage("eraser.png");
    mailIcon = loadImage("mail.png");
-     
-  startPageSession = new Button(width/2 + 50, height/2, 200, 30, "Start Paged Session", 150);
-//  startPageSession = new Button(400, 300, 200, 30, "Start Session", 150);
-  startFreeFlow = new Button(width/2 -200, height/2, 200, 30, "Start Doodle Session", 150);
-  
-  exitSession = new Button(width -200, 40, 70, 30, "Exit", 150);
+  startFreeFlow = new Button(width/4 - 25, height/4, 200, 30, "Start Session", 150);
+  exitSession = new Button(200, 40, 70, 30, "Exit", 150);
 }
 
 
@@ -42,9 +38,8 @@ exitSession.Draw();
  }
   
 if(notStarted){
- startPageSession.Draw();
- startPageSession.MouseIsOver();
- startFreeFlow.Draw();
+ //startFreeFlow.Draw();
+ startFreeFlow.DrawTest(offscreen);
  startFreeFlow.MouseIsOver();
 }
   

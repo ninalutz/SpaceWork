@@ -2,24 +2,21 @@ void renderTable(){
   offscreen.beginDraw();
   pushMatrix();
   offscreen.scale(-1, -1);  
-// offscreen.image(video, 0, 0);
   offscreen.background(barColorC, 150);
-  //offscreen.image(video, -video.width, -video.height);
   offscreen.noStroke();
    if(Strokes.size() > 1){     
-//     println("HIIII");
      offscreen.ellipse(Strokes.get(Strokes.size()-1).loc.x + 5, Strokes.get(Strokes.size()-1).loc.y, 10, 10);
    }
-   fill(0);
-  //offscreen.ellipse(0, 0, 50,50);
+//   offscreen.ellipse(width/2, height/2, 50, 50);
+//   fill(0);
   drawCanvas(offscreen);
+  startFreeFlow.DrawTest(offscreen);
+//  offscreen.ellipse(-100, -100, 50, 50);
   popMatrix();
   offscreen.noFill();
+//  startFreeFlow.DrawTest(offscreen);
   offscreen.endDraw();
-  drawCanvas(offscreen);
-
-//  test(offscreen);
-//  offscreen.endDraw();
+//  drawCanvas(offscreen);
   surface.render(offscreen);
 }
   
