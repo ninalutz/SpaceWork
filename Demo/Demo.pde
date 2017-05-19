@@ -15,7 +15,7 @@ float redVal, greenVal, blueVal;
 
 Keystone ks;
 CornerPinSurface surface;
-PGraphics offscreen, canvas;
+PGraphics offscreen, canvas, pdf, illustration;
 
 ArrayList<Button>buttons = new ArrayList<Button>();
 
@@ -25,6 +25,7 @@ int capwidth, capheight;
 void setup() {
   size(displayWidth, displayHeight, P3D);
   initGUI();
+ // doEmail();
   video = new Capture(this, 800, 600);
 
   ks = new Keystone(this);
@@ -32,6 +33,8 @@ void setup() {
   video.start();
   trackColor = color(255);
   offscreen = createGraphics(800, 600, P3D);
+  illustration = createGraphics(800, 600, P3D);
+  pdf = createGraphics(800, 600, PDF, "output.pdf");
   
     try {
      robot = new Robot();
@@ -46,16 +49,18 @@ void captureEvent(Capture video) {
   // Read image from the camera
   video.read();
 }
-
+boolean record;
 ArrayList<PVector> Things = new ArrayList<PVector>();
 ArrayList<Stroke>Strokes = new ArrayList<Stroke>();
 
 void draw() {
   video.loadPixels();
   background(barColorC);
+  
   renderTable();
 //  mainGUI();
 //  Clicked();
+
 }
 
 int click = 0;

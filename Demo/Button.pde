@@ -57,9 +57,10 @@ class Button {
     p.rect(-x, -y, w, h, 10);
     p.textAlign(CENTER, CENTER);
     p.pushMatrix();
-    p.scale(-1, -1);
+    p.scale(1, -1);
     p.fill(0);
-    p.text(label, x - (w / 2), y - (h / 2));
+    p.textSize(20);
+    p.text(label, -x + (w / 2), y - (h / 2));
     p.popMatrix();
     p.endDraw();
   }

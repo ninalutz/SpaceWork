@@ -24,7 +24,7 @@ void Clicked(){
        println(Clicks.get(i).loc);
 
     if(notStarted){
-    if(startFreeFlow.IsOver(new PVector(-Clicks.get(i).loc.x + 100, -Clicks.get(i).loc.y))){
+    if(startFreeFlow.IsOver(new PVector(-Clicks.get(i).loc.x + 20, -Clicks.get(i).loc.y + 20 ))){
         Strokes.clear();
         notStarted = false;
 
@@ -32,21 +32,25 @@ void Clicked(){
     }
     
     if(!notStarted){
-   
+     
      if(exitSession.IsOver(new PVector(-Clicks.get(i).loc.x, -Clicks.get(i).loc.y))){
        notStarted = true;
        Strokes.clear();
 
      }
-     
-     else{
-        println("HIIII");
-        Menu = true;
-        origin = new PVector(-Clicks.get(i).loc.x, -Clicks.get(i).loc.y);
-        penButton = new Button(origin.x + 5, origin.y, 50,30, "Pen", 150);
-        canvasButton = new Button(origin.x +5, origin.y + 100, 60, 30, "Canvas", 150);
-        emailButton = new Button(origin.x + 5, origin.y + 100, 60, 40, mailIcon);
-     }
+//     
+//      if(Clicks.get(i).loc.x + 275 > - 20 &&  Clicks.get(i).loc.y + 211 > - 20){
+//       notStarted = true;
+//       Strokes.clear();
+//      }
+//     else{
+//        //println("HIIII");
+//        Menu = true;
+//        origin = new PVector(-Clicks.get(i).loc.x, -Clicks.get(i).loc.y);
+//        penButton = new Button(origin.x + 5, origin.y, 50,30, "Pen", 150);
+//        canvasButton = new Button(origin.x +5, origin.y + 40, 60, 30, "Canvas", 150);
+//        emailButton = new Button(origin.x + 5, origin.y + 80, 60, 40, mailIcon);
+//     }
     }
      
      }
