@@ -54,7 +54,7 @@ void draw() {
   video.loadPixels();
   background(barColorC);
   renderTable();
-  mainGUI();
+//  mainGUI();
 //  Clicked();
 }
 

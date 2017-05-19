@@ -27,13 +27,16 @@ void initGUI(){
    eraserIcon = loadImage("eraser.png");
    mailIcon = loadImage("mail.png");
   startFreeFlow = new Button(width/4 - 25, height/4, 200, 30, "Start Session", 150);
-  exitSession = new Button(200, 40, 70, 30, "Exit", 150);
+  exitSession = new Button(width/4-25, 200, 70, 30, "Exit", 150);
 }
 
 
 void mainGUI(){
-exitSession.Draw();
+//exitSession.DrawTest(offscreen);
+//println(notStarted);
+println(exitSession.MouseIsOver());
  if(exitSession.MouseIsOver()){
+   Strokes.clear();
    notStarted = true;
  }
   
@@ -97,4 +100,5 @@ if(canvasMenu){
   fill(barColor);
   noStroke();
   ellipse(mouseX, mouseY, 10, 10);
+  exitSession.DrawTest(offscreen);
 }
