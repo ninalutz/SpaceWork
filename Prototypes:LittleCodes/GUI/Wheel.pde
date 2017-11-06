@@ -4,7 +4,7 @@
  * This default implementation draws a spectrum of colored rectangles.
  * It assumes that HSB mode is set like: colorMode(HSB, 360, 100, 100)
  *
- * Bruce Wilson, 4/26/2013
+ * Be sure to reset the color mode to RGB in your sketch if you need to
  */
 
 class ColorWheel {
@@ -90,4 +90,3 @@ class ColorWheel {
     return angle;
   }
 }
-
